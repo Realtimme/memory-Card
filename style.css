@@ -1,66 +1,211 @@
 body {
   font-family: sans-serif;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
   background: #222;
   color: white;
-  height: 100vh;
+
+  min-height: 100vh;
   margin: 0;
+
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 h1 {
   margin: 20px 0;
+  text-align: center;
 }
 
+/* Stats */
+.stats {
+  margin-bottom: 15px;
+  text-align: center;
+
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Game Board */
 .game-board {
+  width: 100%;
+  max-width: 500px;
+
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  grid-gap: 15px;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 15px;
 }
 
+/* Card */
 .card {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
   perspective: 1000px;
   cursor: pointer;
 }
 
+/* Inner flip */
 .card-inner {
   position: relative;
+
   width: 100%;
   height: 100%;
+
   transition: transform 0.6s;
   transform-style: preserve-3d;
 }
 
+/* Flip animation */
 .card.flip .card-inner {
   transform: rotateY(180deg);
 }
 
-.card-front, .card-back {
+/* Front + Back */
+.card-front,
+.card-back {
   position: absolute;
+
   width: 100%;
   height: 100%;
+
   backface-visibility: hidden;
+
   border-radius: 10px;
+
+  overflow: hidden;
 }
 
+/* Front */
 .card-front {
   background: #333;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 2em;
 }
 
+/* Back */
 .card-back {
   background: #ffb703;
   transform: rotateY(180deg);
 }
+
+/* Images */
 .card-back img {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
+
   border-radius: 10px;
+}
+
+/* Popup background */
+.popup {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+
+/* Popup box */
+.popup-content {
+  background: blue;
+
+  width: 85%;
+  max-width: 350px;
+
+  padding: 30px;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  animation: pop 0.3s ease;
+}
+
+/* Popup text */
+.popup-content h1 {
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  font-size: 18px;
+}
+
+/* Button */
+.popup-content button {
+  margin-top: 15px;
+  padding: 10px 20px;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 16px;
+}
+
+/* Animation */
+@keyframes pop {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 📱 Mobile Responsive */
+@media (max-width: 600px) {
+
+  body {
+    padding: 15px;
+  }
+
+  .game-board {
+    gap: 10px;
+  }
+
+  .stats {
+    font-size: 20px;
+  }
+
+  .popup-content {
+    padding: 20px;
+  }
+
+  .popup-content h1 {
+    font-size: 28px;
+  }
+
+  .popup-content p {
+    font-size: 16px;
+  }
+
+  .popup-content button {
+    width: 100%;
+  }
 }
