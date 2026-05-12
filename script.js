@@ -58,6 +58,7 @@ board.addEventListener('click', e => {
   if (!card || lockBoard || card.classList.contains('flip')) return;
 
   card.classList.add('flip');
+  navigator.vibrate(100);
   clicksound.currentTime = 0;
   clicksound.play();
   flippedCards.push(card);
@@ -73,6 +74,7 @@ board.addEventListener('click', e => {
     const img2 = card2.querySelector('.card-back img').src;
 
     if (img1 === img2) {
+      navigator.vibrate(300);
       matchsound.currentTime = 0;
       matchsound.play();
       // ✅ Match
@@ -88,6 +90,7 @@ board.addEventListener('click', e => {
 
         setTimeout(() => {
           showWinMessage(seconds, moves);
+          navigator.vibrate([500, 200, 500]);
           winsound.currentTime = 0;
           winsound.play();
         }, 500);
@@ -95,6 +98,7 @@ board.addEventListener('click', e => {
 
     } else {
       // ❌ No match
+      navigator.vibrate([200, 100, 200]);
       wrongsound.currentTime = 0;
       wrongsound.play();
 
